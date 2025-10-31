@@ -1,0 +1,163 @@
+# Employee Shift Management Project – Instructions
+
+## Project Overview
+
+This Python project manages employees and their work shifts. It prevents double-booking, enforces shift capacity, and allows easy assignment and viewing of schedules.
+
+## Files Description
+
+1. **report.py**
+
+   * This module handles display and reporting functions for employees and shifts.
+   * It does not modify data; it only reads from the ShiftManager object and prints organized    summaries.
+   
+Class: Report
+class Report:
+    def __init__(self, shift_manager):
+        self.shift_manager = shift_manager
+
+
+Stores a reference to the central ShiftManager so it can access data.
+
+Method 1: shift_summary(self)
+
+Displays all shifts and their assigned employees.
+
+Process:
+
+Checks if there are any shifts created.
+
+For each shift:
+
+Shows shift name
+
+Shows capacity
+
+Lists all employees assigned
+
+Output example:
+
+--- Shift Summary ---
+Shift: Morning | Capacity: 3 | Employees: ['Arpita', 'Rahul']
+Shift: Night   | Capacity: 2 | Employees: ['Sneha']
+
+Method 2: employee_schedule(self, emp_id)
+
+Displays all shifts assigned to a particular employee.
+
+Process:
+
+Calls self.shift_manager.get_employee_schedule(emp_id)
+
+Prints all shifts that employee is assigned to.
+
+Example Output:
+
+Employee E101 is assigned to shifts: ['Morning', 'Evening']
+
+
+If the employee isn’t found or has no shifts:
+
+Employee E101 is not assigned to any shifts.
+
+main(3).py — Menu-Driven Main Program
+
+This is the central control file of your project.
+It ties together all the modules (employee, shift_manager, report, and exceptions) and provides a menu-driven interface for the user.
+Main Features:
+
+1.Creates a ShiftManager and Report object
+2.Displays a menu
+3.Takes user input and performs actions:
+
+Option 1 → Add Employee
+Prompts for employee ID, name, and role.
+Calls manager.add_employee(Employee(emp_id, name, role))
+
+Option 2 → Create Shift
+Asks for shift name and capacity (integer).
+Calls manager.create_shift(shift_name, capacity)
+
+Option 3 → Assign Employee to a Shift
+Calls manager.assign_employee_to_shift(emp_id, shift_name)
+Handles errors like:
+
+DoubleBookingError – employee already in another shift
+
+ShiftCapacityError – shift full
+
+EmployeeNotFoundError – invalid employee ID
+
+Option 4 → View a specific employee’s assigned shifts
+Calls report.employee_schedule(emp_id)
+
+Option 5 → View summary of all shifts
+Calls report.shift_summary()
+
+Option 6 → Exit program
+
+Error handling:
+Uses try–except to catch and print user-friendly messages for invalid inputs or system errors.
+
+2. report (1) (1).py — Report Module
+
+This module handles display and reporting functions for employees and shifts.
+It does not modify data; it only reads from the ShiftManager object and prints organized summaries.
+
+Class: Report
+class Report:
+    def __init__(self, shift_manager):
+        self.shift_manager = shift_manager
+
+
+Stores a reference to the central ShiftManager so it can access data.
+
+Method 1: shift_summary(self)
+
+Displays all shifts and their assigned employees.
+
+Process:
+
+Checks if there are any shifts created.
+
+For each shift:
+
+Shows shift name
+
+Shows capacity
+
+Lists all employees assigned
+
+Output example:
+
+--- Shift Summary ---
+Shift: Morning | Capacity: 3 | Employees: ['Arpita', 'Rahul']
+Shift: Night   | Capacity: 2 | Employees: ['Sneha']
+
+Method 2: employee_schedule(self, emp_id)
+
+Displays all shifts assigned to a particular employee.
+
+Process:
+
+Calls self.shift_manager.get_employee_schedule(emp_id)
+
+Prints all shifts that employee is assigned to.
+
+Example Output:
+
+Employee E101 is assigned to shifts: ['Morning', 'Evening']
+
+
+If the employee isn’t found or has no shifts:
+
+Employee E101 is not assigned to any shifts.
+
+How They Work Together
+File	Responsibility
+employee.py	Defines Employee class
+shift_manager.py	Handles employee creation, shift creation, and assignments
+exceptions.py	Custom errors for invalid assignments
+main(3).py	User interface – runs the menu and calls other modules
+report.py	Displays reports and summaries
+
